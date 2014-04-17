@@ -1,0 +1,1 @@
+<%= _.slugify(moduleName) %>Module = angular.module '<%= moduleName %>', ['ngAnimate']

@@ -1,0 +1,25 @@
+{
+  "name": "<%= moduleName %>",
+  "version": "0.0.0",
+  "main": "<%= moduleName %>.js",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-util": "*",
+    "gulp-concat": "*",
+    "gulp-load-plugins": "*",
+    "gulp-angular-templatecache": "*",
+    "gulp-connect": "*",
+    "gulp-coffeelint": "*",
+    "gulp-compile-js": "*",
+    "gulp-mocha": "*",
+
+    "sinon": "*",
+    "chai": "*",
+
+    "karma": "*",
+    "karma-chrome-launcher": "*",
+    "karma-mocha": "*",
+    "karma-coffee-preprocessor": "*",
+    "karma-phantomjs-launcher": "*"
+  }
+}

@@ -2,7 +2,7 @@ gulp      = require "gulp"
 gutil     = require "gulp-util"
 plugins   = require("gulp-load-plugins")(lazy: false)
 compile   = require "gulp-compile-js"
-
+karma     = require 'gulp-karma'
 
 gulp.task "scripts", ->
   sources =[
@@ -10,9 +10,11 @@ gulp.task "scripts", ->
     "./src/**/*.coffee"
   ]
   gulp.src(sources)
-  .pipe(compile(coffee:
-    bare: true
-  ))
+  .pipe(
+    compile
+      coffee:
+        bare: true
+  )
   .pipe(plugins.concat("<%=moduleName%>.js"))
   .pipe gulp.dest("./build")
   return
@@ -30,28 +32,27 @@ gulp.task "vendorJS", ->
 gulp.task "watch", ->
   sources = [
     "./src/**/*.coffee"
-    "!./app/**/*.spec.js"
+    "!./src/**/*.spec.coffee"
   ]
-  gulp.watch sources, ["scripts", "karma"]
+  gulp.watch sources, ["scripts", "test"]
   return
 
-gulp.task "karma", ->
-  child_process = require "child_process"
-  child = child_process.fork "./karma-run.coffee"
-  child.on "close", (code, signal) ->
-    if code
-      err =
-        message: "Failed: Karma specs!"
-      gutil.log gutil.colors.red err.message
-      gutil.beep()
-
-    else
-      console.log gutil.colors.green "Finished: Karma specs"
+gulp.task "tests", ->
+  sources = [
+    "./src/**/*.spec.coffee"
+  ]
+  gulp.src('./idontexist')
+  .pipe(karma
+    configFile: './karma-unit.coffee'
+    action: 'run'
+  )
+  .on 'error', (err) ->
+    throw err
 
 
 gulp.task "default", [
   "scripts"
-  "karma"
+  "tests"
   "vendorJS"
   "watch"
 ]

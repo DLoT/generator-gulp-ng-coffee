@@ -1,6 +1,9 @@
 # Karma configuration
 karmaFiles = [
-  'build/vendor.js'
+  'bower_components/angular/angular.js'
+  'bower_components/angular-animate/angular-animate.js'
+  'bower_components/angular-mocks/angular-mocks.js'
+  'bower_components/chai/chai.js'
 
   'src/**/*.coffee'
   'src/**/*.spec.coffee'
@@ -18,6 +21,9 @@ module.exports = (config) ->
 
   # list of files to exclude
     exclude: []
+
+    preprocessors:
+      'src/**/*.coffee': ['coffee']
 
   # web server port
     port: 9876
@@ -45,9 +51,12 @@ module.exports = (config) ->
   # if true, it capture browsers, run tests and exit
     singleRun: no
 
-    frameworks: ['mocha']
+    frameworks: ['mocha', 'chai', 'sinon']
 
     plugins: [
       'karma-mocha'
+      'karma-chai'
+      'karma-sinon'
       'karma-phantomjs-launcher'
+      'karma-coffee-preprocessor'
     ]

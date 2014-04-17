@@ -2,6 +2,11 @@
   "name": "<%= moduleName %>",
   "version": "0.0.0",
   "main": "<%= moduleName %>.js",
+
+  "dependencies": {
+    "coffee-script": "*"
+  },
+
   "devDependencies": {
     "gulp": "*",
     "gulp-util": "*",
@@ -12,13 +17,17 @@
     "gulp-coffeelint": "*",
     "gulp-compile-js": "*",
     "gulp-mocha": "*",
+    "gulp-karma": "*",
 
+    "mocha": "*",
     "sinon": "*",
     "chai": "*",
 
     "karma": "*",
     "karma-chrome-launcher": "*",
     "karma-mocha": "*",
+    "karma-chai": "*",
+    "karma-sinon": "*",
     "karma-coffee-preprocessor": "*",
     "karma-phantomjs-launcher": "*"
   }

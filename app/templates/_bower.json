@@ -14,8 +14,11 @@
     "tests"
   ],
   "devDependencies": {
+    "chai": "*",
     "angular": "*",
-    "angular-animate": "*"
+    "angular-animate": "*",
+    "angular-mocks": "*"
+
   }
 }
 

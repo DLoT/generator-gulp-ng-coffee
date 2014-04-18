@@ -110,7 +110,8 @@ gulp.task "watch", ->
   return
 
 gulp.task "watchDemoFiles", ->
-  gulp.watch "./demo/**/*.*", (event) ->
+  gulp.watch "./demo/**/*", (event) ->
+    console.log event
     server.notify event
   return
 

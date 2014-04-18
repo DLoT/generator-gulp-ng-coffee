@@ -58,7 +58,6 @@ gulp.task "tests", ->
   .on 'error', (err) ->
     throw err
 
-
 gulp.task "default", [
   "scripts"
   "tests"

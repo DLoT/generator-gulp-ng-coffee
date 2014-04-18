@@ -44,7 +44,6 @@ server =
     fileName = path.relative(server.basePath, event.path)
     server._lr.changed body:
       files: [fileName]
-
     return
 
 
@@ -56,9 +55,11 @@ getVendorSources = (minified = false)->
     sources.push "./bower_components/#{packageName}/#{fileName}.js"
   sources
 
+
 gulp.task "scripts", ->
   sources =[
     "!./src/**/*.spec.coffee"
+    "!./src/demo.coffee"
     "./src/**/*.coffee"
   ]
   gulp.src(sources)
@@ -69,6 +70,19 @@ gulp.task "scripts", ->
   )
   .pipe(plugins.concat("<%=moduleName%>.js"))
   .pipe gulp.dest("./build")
+  return
+
+gulp.task "demoScripts", ->
+  sources =[
+    "./src/demo.coffee"
+  ]
+  gulp.src(sources)
+  .pipe(
+      compile
+        coffee:
+          bare: true
+    )
+  .pipe gulp.dest("./demo/js")
   return
 
 gulp.task "vendorJS", ->
@@ -89,12 +103,15 @@ gulp.task "livereload", ->
 gulp.task "watch", ->
   sources = [
     "./src/**/*.coffee"
-    "./src/**/*.spec.coffee"
   ]
-  watcher = gulp.watch sources, ["scripts", "karma-unit"]
+  watcher = gulp.watch sources, ["scripts", "demoScripts", "karma-unit"]
   watcher.on 'change', (event) ->
     server.notify event
+  return
 
+gulp.task "watchDemoFiles", ->
+  gulp.watch "./demo/**/*.*", (event) ->
+    server.notify event
   return
 
 gulp.task "karma-unit", ->
@@ -105,11 +122,14 @@ gulp.task "karma-unit", ->
   )
   .on 'error', (err) ->
     throw err
+  return
 
 gulp.task "default", [
   "scripts"
+  "demoScripts"
   "karma-unit"
   "vendorJS"
   "livereload"
   "watch"
+  "watchDemoFiles"
 ]

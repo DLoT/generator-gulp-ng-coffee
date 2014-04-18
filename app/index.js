@@ -42,8 +42,11 @@ var GulpNgCoffeeGenerator = yeoman.generators.Base.extend({
     this.copy('src/_module.coffee', 'src/' + this._.slugify(this.moduleName) + '.coffee');
     this.copy('src/_module.spec.coffee','src/' + this._.slugify(this.moduleName) + '.spec.coffee');
 
-    this.mkdir('css');
-    this.copy('css/_module.css', 'css/' + this._.slugify(this.moduleName) + '.css');
+    this.mkdir('demo');
+    this.copy('demo/_index.html', 'demo/index.html');
+
+    this.mkdir('demo/css');
+    this.copy('demo/css/_module.css', 'demo/css/' + this._.slugify(this.moduleName) + '.css');
   },
 
   projectfiles: function () {

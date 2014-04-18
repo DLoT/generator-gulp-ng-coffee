@@ -7,6 +7,10 @@
   },
 
   "devDependencies": {
+    "express": "*",
+    "tiny-lr": "*",
+    "connect-livereload": "*",
+
     "gulp": "*",
     "gulp-util": "*",
     "gulp-concat": "*",

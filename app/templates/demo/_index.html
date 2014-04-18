@@ -7,11 +7,12 @@
   <link href="css/<%= _.slugify(moduleName) %>.css" rel="stylesheet">
 </head>
 
-<body ng-app="<%= appname %>">
+<body ng-app="<%= moduleName %>">
+  <h1><%= moduleName %> Demo</h1>
   <div class="container" ng-view=""></div>
 
 
-  <script src="build/vendor.js"></script>
-  <script src="build/<%= _.slugify(moduleName) %>"></script>
+  <script src="../build/vendor.js"></script>
+  <script src="../build/<%= _.slugify(moduleName) %>.js"></script>
 </body>
 </html>

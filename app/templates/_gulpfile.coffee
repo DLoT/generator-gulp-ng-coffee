@@ -3,6 +3,17 @@ gutil     = require "gulp-util"
 plugins   = require("gulp-load-plugins")(lazy: false)
 compile   = require "gulp-compile-js"
 karma     = require 'gulp-karma'
+chalk     = require "chalk"
+
+bowerPkg  = require "./bower.json"
+
+getVendorSources = (minified = false)->
+  sources = []
+  for packageName, version of bowerPkg.dependencies
+    fileName = packageName
+    fileName += '.min' if minified
+    sources.push "./bower_components/#{packageName}/#{fileName}.js"
+  sources
 
 gulp.task "scripts", ->
   sources =[
@@ -20,10 +31,11 @@ gulp.task "scripts", ->
   return
 
 gulp.task "vendorJS", ->
-  sources = [
-    "!./bower_components/**/*.min.js"
-    "./bower_components/**/*.js"
-  ]
+  sources = getVendorSources()
+
+  getPackageName = (v) -> v.split('/').reverse()[0]
+  console.log chalk.magenta("Adding [#{sources.map getPackageName}] to vendors.js")
+
   gulp.src(sources)
   .pipe(plugins.concat("vendor.js"))
   .pipe gulp.dest("./build")
@@ -32,15 +44,12 @@ gulp.task "vendorJS", ->
 gulp.task "watch", ->
   sources = [
     "./src/**/*.coffee"
-    "!./src/**/*.spec.coffee"
+    "./src/**/*.spec.coffee"
   ]
   gulp.watch sources, ["scripts", "test"]
   return
 
 gulp.task "tests", ->
-  sources = [
-    "./src/**/*.spec.coffee"
-  ]
   gulp.src('./idontexist')
   .pipe(karma
     configFile: './karma-unit.coffee'

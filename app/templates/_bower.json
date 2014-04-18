@@ -10,15 +10,15 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "test"
   ],
-  "devDependencies": {
-    "chai": "*",
+  "dependencies": {
     "angular": "*",
-    "angular-animate": "*",
-    "angular-mocks": "*"
-
+    "angular-animate": "*"
+  },
+  "devDependencies": {
+    "angular-mocks": "*",
+    "chai": "*"
   }
 }
 

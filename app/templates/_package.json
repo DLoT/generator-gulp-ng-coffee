@@ -4,7 +4,6 @@
   "main": "<%= moduleName %>.js",
 
   "dependencies": {
-    "coffee-script": "*"
   },
 
   "devDependencies": {
@@ -18,6 +17,9 @@
     "gulp-compile-js": "*",
     "gulp-mocha": "*",
     "gulp-karma": "*",
+
+    "coffee-script": "*",
+    "chalk": "*",
 
     "mocha": "*",
     "sinon": "*",

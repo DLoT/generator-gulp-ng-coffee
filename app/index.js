@@ -41,6 +41,9 @@ var GulpNgCoffeeGenerator = yeoman.generators.Base.extend({
     this.mkdir('src');
     this.copy('src/_module.coffee', 'src/' + this._.slugify(this.moduleName) + '.coffee');
     this.copy('src/_module.spec.coffee','src/' + this._.slugify(this.moduleName) + '.spec.coffee');
+
+    this.mkdir('css');
+    this.copy('css/_module.css', 'css/' + this._.slugify(this.moduleName) + '.css');
   },
 
   projectfiles: function () {
@@ -49,7 +52,6 @@ var GulpNgCoffeeGenerator = yeoman.generators.Base.extend({
     this.copy('_gulpfile.coffee', 'gulpfile.coffee');
     this.copy('_package.json', 'package.json');
     this.copy('_karma-unit.coffee', 'karma-unit.coffee');
-    this.copy('_karma-run.coffee', 'karma-run.coffee');
   }
 });
 

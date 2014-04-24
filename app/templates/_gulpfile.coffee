@@ -68,7 +68,7 @@ gulp.task "scripts", ->
       coffee:
         bare: true
   )
-  .pipe(plugins.concat("<%=moduleName%>.js"))
+  .pipe(plugins.concat("<%= _.slugify(moduleName) %>.js"))
   .pipe gulp.dest("./build")
   return
 
@@ -110,7 +110,11 @@ gulp.task "watch", ->
   return
 
 gulp.task "watchDemoFiles", ->
-  gulp.watch "./demo/**/*", (event) ->
+  sources = [
+    "./demo/**/*.html"
+    "./demo/js/*.css"
+  ]
+  gulp.watch sources, (event) ->
     console.log event
     server.notify event
   return

@@ -112,7 +112,7 @@ gulp.task "watch", ->
 gulp.task "watchDemoFiles", ->
   sources = [
     "./demo/**/*.html"
-    "./demo/js/*.css"
+    "./demo/**/*.css"
   ]
   gulp.watch sources, (event) ->
     console.log event

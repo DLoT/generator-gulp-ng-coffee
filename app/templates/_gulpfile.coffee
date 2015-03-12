@@ -100,12 +100,18 @@ gulp.task "livereload", ->
   server.livestart()
   return
 
-gulp.task "watch", ->
+gulp.task "watchSourceFiles", ->
   sources = [
     "./src/**/*.coffee"
   ]
-  watcher = gulp.watch sources, ["scripts", "demoScripts", "karma-unit"]
-  watcher.on 'change', (event) ->
+  gulp.watch sources, ["scripts", "demoScripts", "karma-unit"]
+  return
+
+gulp.task "watchBuildFiles", ->
+  sources = [
+    "./nuild/**/*.js"
+  ]
+  watcher = gulp.watch sources, (event) ->
     server.notify event
   return
 
@@ -115,7 +121,6 @@ gulp.task "watchDemoFiles", ->
     "./demo/**/*.css"
   ]
   gulp.watch sources, (event) ->
-    console.log event
     server.notify event
   return
 
@@ -135,6 +140,7 @@ gulp.task "default", [
   "karma-unit"
   "vendorJS"
   "livereload"
-  "watch"
+  "watchSourceFiles"
+  "watchBuildFiles"
   "watchDemoFiles"
 ]
